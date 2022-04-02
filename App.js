@@ -5,36 +5,31 @@ import PostsList from "./Components/PostsList";
 function App() {
   const [postList, setPostList] = useState([]);
   const [intervalIdInState, setIntervalIdInState] = useState(null);
-  const storageData = JSON.parse(localStorage.getItem("postsInStorage"));
   const addPost = (post) => {
     setPostList([...postList, post]);
   };
-
   useEffect(() => {
-    localStorage.setItem("postsInStorage", JSON.stringify(postList));
-  }, [postList]);
-  useEffect(() => {
-    if (storageData) {
-      setPostList(storageData);
+    const data = localStorage.getItem("storagePostList");
+    if (data) {
+      setPostList(JSON.parse(data));
     }
-  }, []);
-
-  useEffect(() => {
     if (intervalIdInState !== null) {
       clearInterval(intervalIdInState);
     }
     const intervalId = setInterval(
-      () => {
-        //DO SOMETHING HERE
-      },
+      () => {},
 
-      20000
+      10000
     );
     setIntervalIdInState(intervalId);
     return () => {
       clearInterval(intervalIdInState);
     };
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("storagePostList", JSON.stringify(postList));
   }, [postList]);
+
   return (
     <div className="App">
       <Form addPost={addPost} />
