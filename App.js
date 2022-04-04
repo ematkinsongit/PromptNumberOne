@@ -6,8 +6,8 @@ function App() {
   const [postList, setPostList] = useState([]);
   const [intervalIdInState, setIntervalIdInState] = useState(null);
   const addPost = (post) => {
-    setPostList([...postList, post]);
-    localStorage.setItem("storagePostList", JSON.stringify(postList));
+    const newPostList = setPostList([...postList, post]);
+    localStorage.setItem("storagePostList", JSON.stringify(newPostList));
   };
   useEffect(() => {
     const data = localStorage.getItem("storagePostList");
@@ -19,9 +19,9 @@ function App() {
     }
     const intervalId = setInterval(
       () => {
-        localStorage.getItem("storagePostList");
-        if (data) {
-          setPostList(JSON.parse(data));
+        const updatedPosts = localStorage.getItem("storagePostList");
+        if (updatedPosts) {
+          setPostList(JSON.parse(updatedPosts));
         }
       },
 
