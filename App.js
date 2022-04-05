@@ -5,7 +5,7 @@ import PostsList from "./Components/PostsList";
 function App() {
   const [postList, setPostList] = useState([]);
   const [intervalIdInState, setIntervalIdInState] = useState(null);
-  useEffect(() => {});
+ 
   const addPost = (post) => {
     const storedPostList = localStorage.getItem("storagePostList" || []);
     const parsedPosts = JSON.parse(storedPostList);
