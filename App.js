@@ -16,11 +16,7 @@ function App() {
     if (data) {
       setPostList(JSON.parse(data));
     } else {
-      const onLoadPostList = localStorage.setItem(
-        "storagePostList",
-        JSON.stringify([])
-      );
-      setPostList([]);
+      const onLoadPostList = localStorage.setItem("storagePostList", "[]");
     }
 
     if (intervalIdInState !== null) {
